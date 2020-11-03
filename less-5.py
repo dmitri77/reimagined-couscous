@@ -79,3 +79,5 @@ for elem in int_arr:
 
 print(f"Сумма:{sum}")
 
+              
+              
