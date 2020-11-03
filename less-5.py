@@ -50,8 +50,9 @@ with open("text.txt", "r", encoding='utf-8') as file:
 sootv = {"Оne": "Один", "Two": "Два", "Three": "Три"}
 
 for _str in contents:
+
     str_arr = _str.split(' — ')
-    str_arr[0] = sootv.get(str_arr[0])
+    str_arr[0] = sootv[str_arr[0]]
     _str = " — ".join(str_arr)
 
 with open("text.txt", "w", encoding='utf-8') as file:
@@ -61,23 +62,41 @@ with open("text.txt", "w", encoding='utf-8') as file:
 
 from random import random
 
-arr = []
+arr = ""
 with open("text.txt", "w", encoding='utf-8') as file:
     for ind in range(10):
-        arr.append(str(random()) + " ")
-        arr = arr[1:len(arr)-1] + "\n"
+        arr = arr + " " + str(random())
+    arr = arr+ "\n"
     file.writelines(arr)
         
 with open("text.txt", "r", encoding='utf-8') as file:
     contents = file.readlines()
 
 int_arr = contents[0].split(" ")
+int_arr = [elem.replace("\n", "") for elem in int_arr]
 
 sum = 0
 for elem in int_arr:
+    print(elem)
     sum = sum + int(elem)
 
 print(f"Сумма:{sum}")
 
-              
-              
+#6
+import json
+
+_dict = {}
+with open("text.txt", "r", encoding='utf-8') as file:
+    contents = file.readlines()
+    arr = [elem.replace("\n", "") for elem in contents]
+    for elem in arr:
+        arr_lev_1 = elem.split(": ")
+        arr_time = arr_lev_1[1].split(" ")
+        time = 0
+        for elem2 in arr_time:
+            if elem2 != "—":
+                time = time + int(elem2.split("(")[0])
+        _dict[arr_lev_1[0]] = time
+
+print(json.dumps(dict))
+
